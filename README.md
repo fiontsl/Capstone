@@ -37,7 +37,6 @@ How to reproduce the website:
     import time
     time.sleep(5) # Wait for Streamlit to start running
     from pyngrok import ngrok
-    # os.environ["PYNGROK_TIMEOUT"] = "60"
     url = ngrok.connect(proto='http', addr='8501')
     print(url)
 
