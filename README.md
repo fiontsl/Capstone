@@ -14,10 +14,13 @@ Here’s how it works:
 How to reproduce the website:
 
 1) If you are hosting this website on a cloud service, you will need to first create an account and run Ngrok:
+
     from pyngrok import ngrok 
+    
     !ngrok config add-authtoken (your_token)
 
 2) Install requirements.txt
+
     !pip install -r requirements.txt
 
 3) You should also have a seperate config.json file to contain the keys. They should look like this:
@@ -33,18 +36,27 @@ How to reproduce the website:
 5) To get a Ngrok Tunnel link to the website, run the following:
 
     import os
+    
     !nohup streamlit run /content/streamlit_app.py --server.port 8501 &
+    
     import time
+    
     time.sleep(5) # Wait for Streamlit to start running
+    
     from pyngrok import ngrok
+    
     url = ngrok.connect(proto='http', addr='8501')
+    
     print(url)
 
 6) You should get an output that look like this:
 
     nohup: appending output to 'nohup.out'
+    
     WARNING:pyngrok.process.ngrok:t=2023-06-02T22:43:51+0000 lvl=warn msg="ngrok config file found at legacy location, move to XDG location" xdg_path=/root/.config/ngrok/ngrok.yml legacy_path=/root/.ngrok2/ngrok.yml
+    
     NgrokTunnel: "https://071d-34-86-164-136.ngrok-free.app" -> "http://localhost:8501"
 
 7) To check you tunnels:
+
     tunnels = ngrok.get_tunnels()
