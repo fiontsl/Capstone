@@ -15,14 +15,16 @@ import json
 # with open('config.json') as file:
 #     config = json.load(file)
 
+# # Access the API keys
+# aws_access_key_id = config['aws_access_key_id']
+# aws_secret_access_key = config['aws_secret_access_key']
+# apiKey_spoonacular = config['apiKey_spoonacular']
+
+# change this for running streamlit on cloud
 aws_access_key_id = st.secrets["aws_access_key_id"]
 aws_secret_access_key = st.secrets["aws_secret_access_key"]
 apiKey_spoonacular = st.secrets["apiKey_spoonacular"]
 
-# Access the API keys
-aws_access_key_id = config['aws_access_key_id']
-aws_secret_access_key = config['aws_secret_access_key']
-apiKey_spoonacular = config['apiKey_spoonacular']
 
 st.title('Welcome to 5 Sec Recipes App! 🍽️🍅🍆🥦')
 
