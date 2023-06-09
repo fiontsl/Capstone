@@ -11,9 +11,13 @@ import requests
 import boto3
 import json
 
-# Load API keys from JSON file
-with open('config.json') as file:
-    config = json.load(file)
+# # Load API keys from JSON file
+# with open('config.json') as file:
+#     config = json.load(file)
+
+aws_access_key_id = st.secrets["aws_access_key_id"]
+aws_secret_access_key = st.secrets["aws_secret_access_key"]
+apiKey_spoonacular = st.secrets["apiKey_spoonacular"]
 
 # Access the API keys
 aws_access_key_id = config['aws_access_key_id']
@@ -37,7 +41,7 @@ if user_input:
     input_ingredients = str(user_input) # ['onions', 'beef']
     number_recipe_search = num_recipe_input
     response = requests.get("https://api.spoonacular.com/recipes/findByIngredients?", 
-                    params={'apiKey': 'apiKey_spoonacular' , 'ingredients':input_ingredients, 'number':number_recipe_search}).json()
+                    params={'apiKey': apiKey_spoonacular , 'ingredients':input_ingredients, 'number':number_recipe_search}).json()
 
     df = pd.DataFrame(response)
 
@@ -47,7 +51,7 @@ if user_input:
     recipe_search_id = ','.join(recipe_search_id)
 
     # Get each of the receipes detail information
-    response2 = requests.get("https://api.spoonacular.com/recipes/informationBulk?",params={'apiKey':'apiKey_spoonacular','ids':recipe_search_id}).json()
+    response2 = requests.get("https://api.spoonacular.com/recipes/informationBulk?",params={'apiKey':apiKey_spoonacular ,'ids':recipe_search_id}).json()
     df_info = pd.json_normalize(response2)
 
     df_info_chosen = df_info[['id','title', 'readyInMinutes','servings','analyzedInstructions',"sourceUrl","pricePerServing","vegetarian","vegan","glutenFree","dairyFree" , "image", 'dishTypes','diets']]
