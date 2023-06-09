@@ -160,7 +160,7 @@ if user_input:
 
   st.markdown("Please click on the recipe row for more details:")
 
-  select_df = df_all_chosen[["Title","Used_Ingredient_Count","Needed_Ingredient_Count",'Ready_in_Minutes','Relative_Cost']]
+  select_df = df_all_chosen[["Title","Used_Ingredient_Count","Needed_Ingredient_Count",'Ready_in_Minutes','Relative_Cost','usedIngredients', 'missedIngredients','analyzedInstructions']]
 
   def aggrid_interactive_table(df: pd.DataFrame):
       """Creates an st-aggrid interactive table based on a dataframe.
@@ -193,9 +193,7 @@ if user_input:
 
   if selection and serving_size_input:
 
-    # for user take as input
-    st.json(selection["selected_rows"])
-
+    
 
     recipe_title = selection["selected_rows"][0]["Title"]
     st.subheader(recipe_title)
@@ -241,6 +239,10 @@ if user_input:
     # Print the steps
     for count, step in enumerate(steps):
         st.write(count+1,". ", step)
+    
+    # for user take as input
+    st.write("Data Output: ")
+    st.json(selection["selected_rows"])
 
     # st.dataframe(df_selected["selected_rows"])
 
