@@ -188,7 +188,7 @@ if user_input:
   selection = aggrid_interactive_table(df= select_df)
 
 
-  bucket.download_file(Key='df_capstone', Filename='df_capstone_streamlit.csv')
+  bucket.download_file(Key='df_capstone.csv', Filename='df_capstone_streamlit.csv')
   s3_df = pd.read_csv('df_capstone_streamlit.csv', index_col=0)
 
   if selection and serving_size_input:
