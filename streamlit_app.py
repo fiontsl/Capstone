@@ -110,7 +110,7 @@ if user_input:
   s3_resource = session.resource('s3')
   bucket_name = 'de-capstone-fion'
   bucket = s3_resource.Bucket(bucket_name)
-  bucket.upload_file(Filename='df_capstone_streamlit.csv', Key='df_capstone')
+  bucket.upload_file(Filename='df_capstone_streamlit.csv', Key='df_capstone.csv')
   
   # Filtering options - dish types
   st.sidebar.subheader("Choose your dish types:")
