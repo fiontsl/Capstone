@@ -6,6 +6,8 @@ from PIL import Image
 # from streamlit_extras.add_vertical_space import add_vertical_space
 from st_aggrid import AgGrid, GridOptionsBuilder
 from st_aggrid.shared import GridUpdateMode
+from datetime import datetime
+
 
 import requests
 import boto3
@@ -107,10 +109,13 @@ if user_input:
     aws_secret_access_key= aws_secret_access_key,  
     region_name='us-east-1'
   )
+  now = datetime.now() # current date and time
+  dt = now.strftime("%Y-%m-%d-%H-%M-%S") #store date time in string
   s3_resource = session.resource('s3')
   bucket_name = 'de-capstone-fion'
   bucket = s3_resource.Bucket(bucket_name)
-  bucket.upload_file(Filename='df_capstone_streamlit.csv', Key='df_capstone.csv')
+  filename = "df_capstone-" + dt +".csv"
+  bucket.upload_file(Filename='df_capstone_streamlit.csv', Key=filename)
   
   # Filtering options - dish types
   st.sidebar.subheader("Choose your dish types:")
@@ -188,7 +193,7 @@ if user_input:
   selection = aggrid_interactive_table(df= select_df)
 
 
-  bucket.download_file(Key='df_capstone.csv', Filename='df_capstone_streamlit.csv')
+  bucket.download_file(Key= filename, Filename='df_capstone_streamlit.csv')
   s3_df = pd.read_csv('df_capstone_streamlit.csv', index_col=0)
 
   if selection and serving_size_input:
@@ -242,6 +247,7 @@ if user_input:
     
     # for user take as input
     st.write("Data Output: ")
+    st.json("https://de-capstone-fion.s3.amazonaws.com/"+filename)
     st.json(selection["selected_rows"])
 
     # st.dataframe(df_selected["selected_rows"])
