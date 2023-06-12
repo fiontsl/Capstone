@@ -111,10 +111,11 @@ if user_input:
   )
   now = datetime.now() # current date and time
   dt = now.strftime("%Y-%m-%d-%H-%M-%S") #store date time in string
+  file_time = dt
   s3_resource = session.resource('s3')
   bucket_name = 'de-capstone-fion'
   bucket = s3_resource.Bucket(bucket_name)
-  filename = "df_capstone-" + dt +".csv"
+  filename = "df_capstone-" + file_time +".csv"
   bucket.upload_file(Filename='df_capstone_streamlit.csv', Key=filename)
   
   # Filtering options - dish types
@@ -247,7 +248,8 @@ if user_input:
     
     # for user take as input
     st.write("Data Output: ")
-    st.json("https://de-capstone-fion.s3.amazonaws.com/"+filename)
+#     link = "https://de-capstone-fion.s3.amazonaws.com/"+filename
+    st.write("https://de-capstone-fion.s3.amazonaws.com/"+filename)
     st.json(selection["selected_rows"])
 
     # st.dataframe(df_selected["selected_rows"])
