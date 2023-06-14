@@ -217,8 +217,8 @@ if user_input:
     needed_ingred = selected_row_json['missedIngredients'].replace("'", "\"")
     servings = selected_row_json['servings'] 
     
-    used_ingred = json.loads(used_ingred.replace("'", "\"")) 
-    needed_ingred = json.loads(needed_ingred.replace("'", "\""))
+    used_ingred = json.loads(used_ingred.replace("'", '"'))
+    needed_ingred = json.loads(needed_ingred.replace("'", '"'))
 
     # Print the ingredient lists
     st.write("👉 Used ingredients: ")   
