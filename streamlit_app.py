@@ -217,8 +217,17 @@ if user_input:
     needed_ingred = selected_row_json['missedIngredients'].replace("'", "\"")
     servings = selected_row_json['servings'] 
     
-    used_ingred = json.loads(used_ingred.replace("'", '"'))
-    needed_ingred = json.loads(needed_ingred.replace("'", '"'))
+    try:
+        used_ingred = json.loads(used_ingred.replace("'", '"'))
+    except json.JSONDecodeError as e:
+        print("Error decoding used_ingred:", e)
+        print("used_ingred:", used_ingred)
+
+    try:
+        needed_ingred = json.loads(needed_ingred.replace("'", '"'))
+    except json.JSONDecodeError as e:
+        print("Error decoding needed_ingred:", e)
+        print("needed_ingred:", needed_ingred)
 
     # Print the ingredient lists
     st.write("👉 Used ingredients: ")   
