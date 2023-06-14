@@ -232,16 +232,26 @@ if user_input:
     # Print the ingredient lists
     st.write("👉 Used ingredients: ")   
 
+    # Print the ingredient lists
+    st.write("👉 Used ingredients:")
     for item in used_ingred:
-      old_amount = float(item['amount'])
-      new_amount = round(old_amount*(serving_scale(float(serving_size_input), float(servings))),3)
-      st.write("- ", new_amount, item['unit'], item['originalName'])
-       
-    st.write("👉 Needed ingredients: ")
+        try:
+            old_amount = float(item['amount'])
+            new_amount = round(old_amount * (serving_scale(float(serving_size_input), float(servings))), 3)
+            st.write("- ", new_amount, item['unit'], item['originalName'])
+        except (KeyError, TypeError) as e:
+            print("Error converting used ingredient amount:", e)
+            print("item:", item)
+
+    st.write("👉 Needed ingredients:")
     for item in needed_ingred:
-      old_amount = float(item['amount'])
-      new_amount = round(old_amount*(serving_scale(float(serving_size_input), float(servings))),3)
-      st.write("- ", new_amount, item['unit'], item['originalName'])
+        try:
+            old_amount = float(item['amount'])
+            new_amount = round(old_amount * (serving_scale(float(serving_size_input), float(servings))), 3)
+            st.write("- ", new_amount, item['unit'], item['originalName'])
+        except (KeyError, TypeError) as e:
+            print("Error converting needed ingredient amount:", e)
+            print("item:", item)
 
     st.write("👉 Cooking Instructions: ")
 
