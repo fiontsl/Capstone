@@ -230,9 +230,6 @@ if user_input:
         print("needed_ingred:", needed_ingred)
 
     # Print the ingredient lists
-    st.write("👉 Used ingredients: ")   
-
-    # Print the ingredient lists
     st.write("👉 Used ingredients:")
     for item in used_ingred:
         try:
@@ -256,7 +253,11 @@ if user_input:
     st.write("👉 Cooking Instructions: ")
 
     recipe_instruction = selected_row_json["analyzedInstructions"].replace("'", "\"") # selection["selected_rows"][0]["analyzedInstructions"]
-    recipe_instruction= json.loads(recipe_instruction)
+    try:
+        recipe_instruction = json.loads(recipe_instruction)
+    except json.JSONDecodeError as e:
+        print("Error decoding recipe_instruction:", e)
+        print("recipe_instruction:", recipe_instruction)
 
     # Get the instruction steps
     steps = [step['step'] for step in recipe_instruction[0]['steps']]
