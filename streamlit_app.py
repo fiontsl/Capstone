@@ -258,13 +258,17 @@ if user_input:
     except json.JSONDecodeError as e:
         print("Error decoding recipe_instruction:", e)
         print("recipe_instruction:", recipe_instruction)
+    
+    try: 
+      # Get the instruction steps
+      steps = [step['step'] for step in recipe_instruction[0]['steps']]
 
-    # Get the instruction steps
-    steps = [step['step'] for step in recipe_instruction[0]['steps']]
-
-    # Print the steps
-    for count, step in enumerate(steps):
-        st.write(count+1,". ", step)
+      # Print the steps
+      for count, step in enumerate(steps):
+          st.write(count+1,". ", step)
+    except (KeyError, IndexError, TypeError) as e:
+        print("Error extracting steps from recipe_instruction:", e)
+        print("recipe_instruction[0]:", recipe_instruction[0])
     
     # for user take as input
     st.write("Data Output: ")
