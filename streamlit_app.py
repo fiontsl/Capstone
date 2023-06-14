@@ -213,12 +213,12 @@ if user_input:
       scale_factor = float(serving_size_input)/ float(servings)
       return scale_factor
     
-    used_ingred = selected_row_json['usedIngredients'].replace("'", "\"")
+    used_ingred = selected_row_json['usedIngredients'].replace("'", "\"") #By replacing the single quotes with double quotes, the JSON strings will be valid, with no decoding error.
     needed_ingred = selected_row_json['missedIngredients'].replace("'", "\"")
     servings = selected_row_json['servings'] 
     
-    used_ingred = json.loads(used_ingred)
-    needed_ingred = json.loads(needed_ingred)
+    used_ingred = json.loads(used_ingred.replace("'", "\"")) 
+    needed_ingred = json.loads(needed_ingred.replace("'", "\""))
 
     # Print the ingredient lists
     st.write("👉 Used ingredients: ")   
