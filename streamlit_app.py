@@ -160,7 +160,8 @@ if user_input:
     if drop_flag[index]: 
         df_all_chosen.drop(index, inplace=True)
 
-
+  st.write("Data Output: https://de-capstone-fion.s3.amazonaws.com/"+filename)
+#     link = "https://de-capstone-fion.s3.amazonaws.com/"+filename
 
   serving_size_input = st.text_input("📝 Input your ideal serving size")
 
@@ -271,9 +272,8 @@ if user_input:
 #         print("recipe_instruction[0]:", recipe_instruction[0])
     
     # for user take as input
-    st.write("Data Output: ")
-#     link = "https://de-capstone-fion.s3.amazonaws.com/"+filename
-    st.write("https://de-capstone-fion.s3.amazonaws.com/"+filename)
+    st.write("Json Output: ")
+
     st.json(selection["selected_rows"])
 
     # st.dataframe(df_selected["selected_rows"])
