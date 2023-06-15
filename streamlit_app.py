@@ -268,7 +268,7 @@ if user_input:
           st.write(count+1,". ", step)
     except (KeyError, IndexError, TypeError) as e:
         print("Error extracting steps from recipe_instruction:", e)
-        print("recipe_instruction[0]:", recipe_instruction[0])
+#         print("recipe_instruction[0]:", recipe_instruction[0])
     
     # for user take as input
     st.write("Data Output: ")
